@@ -1,0 +1,49 @@
+import random
+
+def jogo ():
+    print ("modo de jogo")
+    print ("1 - advinhar o numero")
+    print("2 - computador adivinha o numero")
+    modo=input()
+    tentativas=0
+
+    if modo=="1":
+        numero=random.randint(0,100)
+        resultado=False 
+        
+        while resultado==False:
+            resposta=int(input("Resposta: "))
+            
+            
+            if resposta==numero:
+                print("Acertou, o número de tentativas é:", tentativas)
+                resultado=True
+            elif resposta<numero:
+                print("O número que pensei é Maior")
+            else:
+                print("O número que pensei é Menor")
+ 
+    if modo=="2":
+        numeroescolhido=int(input("Número escolhido: "))
+        resultado=False
+        minimo=0
+        maximo=100
+        while resultado==False:
+            resposta=(minimo+maximo)//2
+            print("O número é: ", resposta)
+            minharesposta=int(input(""))
+            tentativas=tentativas+1
+            
+            if minharesposta==0:
+                resultado=True
+                print("O jogo acabou: ", tentativas)
+            elif minharesposta==-1:
+                print("O número é mais pequeno")
+                maximo=resposta
+            elif minharesposta==1:
+                print("O número é maior")
+                minimo=resposta
+            else:
+                print("inputinvalid")
+
+jogo()
