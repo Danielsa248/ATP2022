@@ -13,6 +13,7 @@ def jogo ():
         
         while resultado==False:
             resposta=int(input("Resposta: "))
+            tentativas=tentativas+1
             
             
             if resposta==numero:
