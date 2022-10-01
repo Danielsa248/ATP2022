@@ -37,12 +37,10 @@ def jogo ():
             
             if minharesposta==0:
                 resultado=True
-                print("O jogo acabou: ", tentativas)
+                print("O jogo acabou:", tentativas, "tentativas")
             elif minharesposta==-1:
-                print("O número é mais pequeno")
                 maximo=resposta
             elif minharesposta==1:
-                print("O número é maior")
                 minimo=resposta
             else:
                 print("inputinvalid")
