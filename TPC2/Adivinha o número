@@ -14,8 +14,7 @@ def jogo ():
         while resultado==False:
             resposta=int(input("Resposta: "))
             tentativas=tentativas+1
-            
-            
+                        
             if resposta==numero:
                 print("Acertou, o número de tentativas é:", tentativas)
                 resultado=True
