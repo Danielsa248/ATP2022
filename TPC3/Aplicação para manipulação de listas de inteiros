@@ -1,0 +1,228 @@
+import random
+def crialista(n):
+    lista=[]
+    i=0
+    while i<n:
+        num=random.randint(1,100)
+        lista.append(num)
+        i=i+1  
+
+    return lista
+
+
+def crialista2(n):
+
+    lista=[]
+    i=0
+
+    while i<n:
+        num=int(input('Digite um elemento da lista: '))
+        lista.append(num)
+        i=i+1
+    
+    return lista
+
+def somalista(lista):
+
+    soma=0
+
+    for num in lista:
+        soma=soma+num
+    
+    return soma
+
+def medialista(lista):
+
+    soma=0
+
+    for num in lista:
+        soma=soma+num
+    
+    return soma/len(lista)
+
+def maiorlista(lista):
+
+    maior=lista[0]
+
+    for num in lista[1:]:
+
+        if num>maior:
+            maior=num
+    
+    return maior        
+
+def menorlista(lista):
+
+    menor=lista[0]
+
+    for num in lista[1:]:
+
+        if num<menor:
+            menor=num
+    
+    return menor
+
+def crescentelista(lista):
+
+    listacrescente=lista[:]
+    listacrescente.sort()
+    flag=0
+    
+    if listacrescente==lista[:]:
+        flag=1
+        
+    if flag==1:
+        print('Sim')
+    
+    else:
+        print('Não')
+
+def decrescentelista(lista):
+
+    decrescentelista=lista[:]
+    decrescentelista.sort(key=int, reverse=True)
+    flag=0
+
+    if decrescentelista==lista[:]:
+        flag=1
+
+    if flag==1:
+        print('Sim')
+
+    else:
+        print('Não') 
+
+def procurarlista(lista):
+
+    elem=int(input("Digite o elemento que procura: "))
+    
+    if elem in lista:
+        print('O elemento {} está na posição {}'.format(elem,lista.index(elem)+1))
+
+    else:
+       print('O elemento {} não está na lista'.format(elem))        
+
+    
+
+
+
+def aplicacao():
+
+    lista=[]
+    modo=-1
+    while modo!=0:
+        modo=int(input("Escolha o modo: "))
+
+        print('MENU:')
+        print("(1) Criar lista")
+        print("(2) Ler lista")
+        print("(3) Soma")
+        print("(4) Média")
+        print("(5) Maior")
+        print("(6) Menor")
+        print("(7) Está ordenada por ordem crescente?")
+        print("(8) Está ordenada por ordem decrescente?")
+        print("(9) Procurar um elemento")
+        print("(0) Sair")
+        print("")
+    
+           
+
+        if modo==1:
+            print("MODO CRIAR LISTA")
+            n=int(input('Número de elementos da lista: '))
+            if n<0:
+                print('A lista não pode ser criada, tem de ter 0 ou mais elementos')
+                print("")
+            
+            else:
+                lista=crialista(n)
+                print('Lista =', lista)
+                print("")
+
+        if modo==2:
+            print('LER LISTA')
+            n=int(input('Número de elementos da lista: '))
+            if n<0:
+                print('A lista não pode ser criada, tem de ter 0 ou mais elementos')
+                print("")
+            
+            else:
+                lista=crialista2(n)
+                print('Lista =', lista)
+                print("")
+
+        if modo==3:
+            print('MODO SOMA')
+            soma=somalista(lista)
+            print('A soma é igual a', soma)
+            print("")
+
+        
+        if modo==4:
+            print('MODO MÉDIA')
+            if n==0:
+                print('Não é possível calcular a média de uma lista com 0 elementos, crie outra lista com mais de 0 elementos')
+                print("")
+            
+            else:
+                soma=medialista(lista)
+                print('A média é igual a', soma)
+                print("")
+
+
+        if modo==5:
+            print('MODO MAIOR')
+            if n==0:
+                print('Não existem elementos nesta lista')
+                print("")
+            
+            else:
+                maior=maiorlista(lista)
+                print('O maior elemento é:', maior)
+        
+
+        if modo==6:
+            print('MODO MENOR')
+            if n==0:
+                print('Não existem elementos nesta lista')
+
+            else:
+                menor=menorlista(lista)
+                print('O menor elemento é:', menor)
+
+
+        if modo==7:
+            print('MODO ESTÁ ORDENADA POR ORDEM CRESCENTE?')
+            if n==0:
+                print('Não existem elementos nesta lista')
+            
+            else:
+                crescentelista(lista)
+                print('')
+
+        if modo==8:
+            print('MODO ESTÁ ORDENADA POR ORDEM DECRESCENTE?')
+            if n==0:
+                print('Não existem elementos nesta lista')
+            
+            else:
+               decrescentelista(lista) 
+               print('')
+
+
+        if modo==9:
+            print('MODO PROCURAR UM ELEMENTO')
+            if n==0:
+                print('Não existem elementos nesta lista')
+            
+            else:
+                procurarlista(lista)
+
+
+        if modo==0:
+            print('MODO Sair')
+            print('A apliacação irá terminar...')
+            print(lista)
+
+aplicacao()
