@@ -1,0 +1,243 @@
+#1
+def listar(cinema):
+    
+    print('Filme')
+    print('------')
+    
+    for sala in cinema:
+        print(sala[2])
+
+
+#2
+def lefilme():
+    filme=input('Digite um filme: ')
+
+    return filme
+
+def filmeexiste (cinema, filme):
+    existe = False
+    
+    for sala in cinema:
+        
+        if filme in sala:
+            existe = True
+        
+    return existe
+
+def lelugar(cinema, filme):
+    nlugares=numlugares(cinema, filme)
+    flag = True
+   
+    while flag:
+        lugar=int(input('Digite um lugar: '))
+
+        if 0 < lugar <= nlugares:
+            flag = False
+        
+        else:
+            print('Lugar não é válido')
+    
+    return lugar
+
+def lugaresocupados(cinema, filme):
+    ocupados=[]
+
+    for sala in cinema:
+        if filme in sala:
+            ocupados = sala[1]
+
+    return ocupados
+
+def disponivel(cinema, filme, lugar):
+    res = True
+
+    if filmeexiste(cinema, filme):
+        ocupados = lugaresocupados(cinema, filme)
+
+        if lugar in ocupados:
+            res = False     
+
+    return res
+           
+        
+#3
+def numlugares(cinema, filme):
+    nlugares = 0
+
+    for sala in cinema:
+        if filme in sala:
+            nlugares=sala[0]
+    
+    return nlugares
+
+def vendebilhete(cinema, filme, lugar):
+        
+    if filmeexiste(cinema, filme):
+        venda = int(input('Número do lugar a comprar: '))
+        
+        for sala in cinema:
+                    
+            if venda in sala[1]:
+                print('Esse lugar já está ocupado')
+            
+            else:
+                nlugares = numlugares(cinema, filme)
+                ocupados = lugaresocupados(cinema, filme)
+
+                if 0 < venda <= nlugares:
+                    ocupados.append(venda)
+                    print('Lugar {} comprado'.format(venda))
+                    
+    return lugaresocupados  
+
+
+#4
+def listardisponibilidade(cinema):
+    print('Filme     Número de Lugares Vagos')
+    print('---------------------------------')
+    
+    for sala in cinema:
+        print(sala[2],'    ', sala[0]-len(sala[1]))
+
+
+#5
+def listarlugaresocupados(cinema):
+    print('Filme           Número dos Lugares Ocupados')
+    print('---------------------------------------------------')
+
+    for sala in cinema:
+        print(sala[2],sala[1])       
+
+
+#6
+def inserirsala(cinema):
+    filmenovasala = input('Digite o novo filme: ')
+    lugarestotais = int(input('Digite o número total de lugares da sala: '))
+    existe = False
+    salanova = [lugarestotais, [], filmenovasala]
+    
+    for sala in cinema:
+        
+        if salanova[2] == sala[2]:
+            print('Esta sala já existe')  
+            existe = True
+
+    if not existe:
+        cinema.append(salanova)
+        print(f'Sala nova criada - [{lugarestotais} lugares totais, {[]} lugares ocupados, {filmenovasala}]')    
+    
+    return cinema
+    
+
+#7
+def libertarlugar (cinema, filme, lugar):
+    
+    if filmeexiste(cinema, filme):
+        lugarlibertar = int(input('Digite o número do lugar: '))
+
+        for sala in cinema:
+
+            if lugarlibertar in sala[1]:
+                sala[1].remove(lugarlibertar)
+                print('O lugar {} foi libertado'.format(lugarlibertar))
+            
+            else:
+                print('Este lugar não chegou a estar reservado')
+       
+
+#0
+def sair():
+
+    return 
+
+
+
+
+def menu():
+
+    print('MENU')
+    print("""
+    (1) Listar
+    (2) Disponibilidade
+    (3) Vender Bilhete
+    (4) Listar Disponibilidade
+    (5) Listar Lugares Ocupados
+    (6) Adicionar Sala
+    (7) Libertar Lugar
+    (0) Sair
+    """)
+
+
+def aplicacao():
+    sala = (150, [2,3,4], "Twilight")
+    cinema=[sala]
+    modo=-1
+
+    while modo!=0:
+        menu()
+        modo=int(input('Modo da aplicação: '))
+                
+        if modo == 1:
+            print('Modo Listar')
+            listar(cinema)
+            print('')
+            print('')
+        
+        elif modo == 2:
+            print('Modo Disponibilidade')
+            filme = lefilme()
+            lugar = lelugar (cinema, filme)
+            estadisponivel = disponivel(cinema, filme, lugar)
+
+            if estadisponivel:
+                print('Lugar está disponível')
+                print('')
+                print('')
+            
+            else:
+                print('Lugar não está disponível')
+                print('')
+                print('')
+
+        
+        elif modo == 3:
+            print('Modo Vender Bilhete')
+            filme = lefilme()
+            lugar = numlugares(cinema, filme)
+            vendebilhete(cinema, filme, lugar)
+            print('')
+            print('')
+        
+        elif modo == 4:
+            print('Modo Listar Disponibilidade')
+            listardisponibilidade(cinema)
+            print('')
+            print('')
+            
+        elif modo == 5:
+            print('Modo Listar Lugares Ocupados')
+            listarlugaresocupados(cinema)
+            print('')
+            print('')
+
+        elif modo == 6:
+            print('Modo Adicionar Sala')
+            inserirsala(cinema)
+            print('')
+            print('')
+        
+        elif modo == 7:
+            print('Modo Libertar Lugar')
+            filme = lefilme()
+            lugar = numlugares(cinema, filme)
+            libertarlugar(cinema, lugar, filme)
+            print('')
+            print('')   
+
+        elif modo == 0:
+            print('Modo Sair')
+            print('.........')
+            sair()
+    
+
+aplicacao()
