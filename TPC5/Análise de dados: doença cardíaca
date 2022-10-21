@@ -1,0 +1,178 @@
+def guardar():
+
+    f = open('myheart.csv', 'r')
+    linha = f.readline()
+    lista = []
+    
+    for linha in f:
+        dado = linha.split(',')
+        ultimoelem = dado[-1].split('\n')
+        info = (int(dado[0]), dado[1], int(dado[2]), int(dado[3]), int(dado[4]), ultimoelem[0])
+        lista.append(info)
+
+    f.close()
+
+    return lista
+
+guardar()
+
+
+def distribsexo():
+    
+    sexo = {}
+    lista = guardar()
+
+    for tuplo in lista:
+        
+        if tuplo[5] == '1' and tuplo[1] in sexo:
+            sexo[tuplo[1]] = sexo[tuplo[1]] + 1
+            
+        elif tuplo[5] == '1' and tuplo[1] not in sexo:
+            sexo[tuplo[1]] = 1
+
+    return sexo
+    
+distribsexo()   
+
+
+def distribidade():
+    
+    idade = {}
+    lista = guardar()
+
+    for tuplo in lista:
+
+        if tuplo[5] == '1' and tuplo[0] in idade:
+            idade[tuplo[0]] = idade[tuplo[0]] + 1
+        
+        elif tuplo[5] == '1' and tuplo[0] not in idade:
+            idade[tuplo[0]] = 1
+    
+    return idade  
+
+distribidade()
+
+
+def distribcolesterol():
+    
+    colesterol = {}
+    lista = guardar()
+
+    for tuplo in lista:
+        if tuplo[5] == '1' and tuplo[3] in colesterol:
+            colesterol[tuplo[3]] = colesterol[tuplo[3]] + tuplo[3]
+        
+        elif tuplo[5] == '1' and tuplo[3] not in colesterol:
+            colesterol[tuplo[3]] = tuplo[3]
+
+    return colesterol
+
+distribcolesterol()
+
+
+def imprimesexo():
+    
+    sexo = distribsexo()
+
+    for key in sexo:
+        print(f'{key}    | {sexo[key]}')
+
+
+def imprimeidade():
+    
+    idade = distribidade()
+    key = list(idade.keys())
+    key.sort()
+    i = 0
+
+    while i <= key[-1]:
+        doentetotal = 0
+
+        for n in range(0,5):
+            doentetotal = doentetotal + idade.get(i+n, 0)
+            
+        if doentetotal != 0:
+            print(f'[{i}-{i+4}] | {doentetotal}')
+        
+        i += 5
+
+
+def imprimecolesterol():
+    
+    colesterol = distribcolesterol()
+    key = list(colesterol.keys())
+    key.sort()
+    i = 0
+
+    while i <= key[-1]:
+        doentetotal = 0
+    
+        for n in range(0,11):
+            doentetotal = doentetotal + colesterol.get(i+n, 0)
+        
+        if doentetotal != 0:
+            print(f'[{i}-{i+10}] | {doentetotal}')
+        
+        i += 11
+
+
+def menu():
+    print('BEM VINDO!!!')
+    print('')
+    print('MENU')
+    print('')
+    print('(1) Mostrar Tabela de Doença por Distribuição de Sexo')
+    print('(2) Mostrar Tabela de Doença por Distribuição de Idades')
+    print('(3) Mostrar Tabela de Doença por Distribuição de Níveis de Colesterol')
+    print('(0) Fechar aplicação')
+
+
+def app():
+    
+    modo = -1
+        
+    while modo != 0:
+        menu()
+        modo = int(input('Escolha uma opção: '))
+
+        if modo == 1:
+            print('')
+            print('Modo Mostrar Tabela de Doetes por Distribuição de Sexo')
+            print('')
+            print('Sexo | Número')
+            print('-----------')
+            imprimesexo()
+            print('')
+            print('')
+        
+        elif modo == 2:
+            print('')
+            print('Modo Mostrar Tabela de Doentes por Distribuição de Idades')
+            print('')
+            print('Idades  | Número')
+            print('-----------')
+            imprimeidade()
+            print('')
+            print('')
+
+        elif modo == 3:
+            print('')
+            print('Modo Mostrar Tabela de Doentes por Distribuição de Níveis de Colesterol')
+            print('')
+            print('Níveis    | Número')
+            print('-----------')
+            imprimecolesterol()
+            print('')
+            print('')
+
+        elif modo == 0:
+            print('')
+            print('Modo Fechar Aplicação')
+            print('')
+            print('A aplicação encerará')
+            print('...')
+            print('')
+            print('')
+        
+            
+app()
