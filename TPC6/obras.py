@@ -238,12 +238,10 @@ def tabela(obras):
 
 def mostrarpp():
     myObras = readDataset('obras.csv')
-    i = 1
 
-    while i in range(1, len(myObras)):
+    for i in range(0, len(myObras)):
         pp(myObras[i])
-        i += 1
-
+        
 
 
 ### Função mostrar listas/ dicionários ###
