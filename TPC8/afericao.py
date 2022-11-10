@@ -29,9 +29,7 @@ def acimaMedia(n):
         num = int(input('Digite um número a ser lido'))
         lista.append(num)
         i += 1
-
-    for elem in lista:
-        res = res + elem
+        res = res + num
     
     media = res/len(lista)
 
