@@ -8,7 +8,7 @@ def inicDiferente(s1, s2):
             res += 1
         
         else:
-            return(res)    
+            return res   
     
     print(res)
 
