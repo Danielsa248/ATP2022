@@ -80,10 +80,14 @@ def figuais(f1, f2):
     for l in file1:
         listaf1.append(l.strip('\n'))
     
+    file1.close()
+    
     file2 = open(f2, 'r')
 
     for l in file2:
         listaf2.append(l.strip('\n'))
+    
+    file2.close()
     
     listaf1.sort()
     print(listaf1)
@@ -91,8 +95,8 @@ def figuais(f1, f2):
     print(listaf2)
 
     return listaf1 == listaf2 
-    
-    
+  
+  
 print(figuais('texto1.txt', 'texto2.txt'))
 
 
